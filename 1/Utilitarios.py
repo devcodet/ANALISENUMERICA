@@ -44,13 +44,15 @@ def separarNumero(numero: str) -> tuple[bool, str, str]:
         tuple: Um tuplo com um booleano que indica se o número é negativo, e contendo a parte inteira e a parte decimal do número.
     """
     # Verifica se o primeiro caractere da string é um hífen e avalia diretamente para um valor booleano (True ou False).
-    numero_negativo = str(numero).startswith("-")
+    numero_negativo = numero.startswith("-")
     # Remover o sinal do número.
-    if str(numero).startswith(("+", "-")):
+    if numero.startswith(("+", "-")):
         numero = numero[1:]
 
     # Separar a parte inteira da parte decimal
-    parte_inteira, parte_fracionaria = numero.split(
-        '.') if 'in' in numero else numero, ''
+    if '.' in str(numero):
+        parte_inteira, parte_fracionaria = numero.split('.')
+    else:
+        parte_inteira, parte_fracionaria = numero, ''
 
     return numero_negativo, parte_inteira, parte_fracionaria

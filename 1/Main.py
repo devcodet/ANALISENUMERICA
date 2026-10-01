@@ -7,7 +7,7 @@ def main():
     while True:
         try:
             # Ler input do utilizador (número, base atual, nova base)
-            numero, atual_base, nova_base = lerInput()
+            atual_base, numero, nova_base = lerInput()
 
             # Converter o número da base atual para a nova base
             convertido = converter(numero, atual_base, nova_base)
