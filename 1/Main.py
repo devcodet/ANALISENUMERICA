@@ -1,21 +1,21 @@
 
-from Utils import readInput
+from Input import lerInput
+from Processamento import converter
 
 
 def main():
-
     while True:
         try:
             # Ler input do utilizador (número, base atual, nova base)
-            number, current_base, new_base = readInput()
+            numero, atual_base, nova_base = lerInput()
 
             # Converter o número da base atual para a nova base
-            converted = convert(number, current_base, new_base)
+            convertido = converter(numero, atual_base, nova_base)
 
             # Mostrar resultado
             print(f"\nConversão concluída com sucesso!")
-            print(f"O número {number} está na base {current_base}.")
-            print(f"O número na base {new_base} é {converted}\n")
+            print(f"O número {numero} está na base {atual_base}.")
+            print(f"O número na base {nova_base} é {convertido}\n")
 
         except Exception as e:
             # Captura qualquer erro inesperado e informa o utilizador
