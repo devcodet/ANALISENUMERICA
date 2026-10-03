@@ -11,6 +11,4 @@ VALOR_DECIMAL_PARA_DIGITO = {
 DIGITO_PARA_VALOR = {valor: digito for digito,
                      valor in VALOR_DECIMAL_PARA_DIGITO.items()}
 
-PRECISAO_PARTE_FRACIONARIA = 8
-
 EPS = 1e-9

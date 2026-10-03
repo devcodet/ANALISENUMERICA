@@ -4,3 +4,6 @@ class Numero:
         self.valor_atual = str(valor_atual)
         self.base_nova = base_nova
         self.valor_novo = str(valor_novo)
+
+
+PRECISAO_PARTE_FRACIONARIA = 8

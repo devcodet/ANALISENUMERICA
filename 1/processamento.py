@@ -1,6 +1,9 @@
 import decimal
+import Numero
 
-from Globais import VALOR_DECIMAL_PARA_DIGITO, DIGITO_PARA_VALOR, PRECISAO_PARTE_FRACIONARIA, EPS
+from Numero import PRECISAO_PARTE_FRACIONARIA
+
+from Globais import VALOR_DECIMAL_PARA_DIGITO, DIGITO_PARA_VALOR, EPS
 from Utilitarios import separarNumero
 
 
@@ -109,7 +112,8 @@ def converterParteInteira(numero: str, base_atual: int, base_nova: int) -> str:
         str: A parte inteira do número convertida na nova base.
     """
     decimal: str = parteInteiraBaseAtualParaDecimal(
-        numero, base_atual) if base_atual != 10 else numero
+        numero,
+        base_atual) if base_atual != 10 else numero
 
     return parteInteiraDecimalParaNovaBase(decimal, base_nova)
 
@@ -133,7 +137,7 @@ def converterParteFracionaria(numero: str, base_atual: int, base_nova: int, prec
     return parteFracionariaParaNovaBase(parte_fracionaria, base_nova, precision)
 
 
-def converter(numero: str, base_atual: int, base_nova: int) -> str:
+def converter(numero: Numero):
     """
     Permite converter um número na base atual para uma nova base.
 
@@ -145,16 +149,18 @@ def converter(numero: str, base_atual: int, base_nova: int) -> str:
     Returns:
         str: O número convertido na base_nova.
     """
-    negativo, parte_inteira, parte_fracionaria = separarNumero(numero)
+    negativo, parte_inteira, parte_fracionaria = separarNumero(
+        numero.valor_atual)
 
-    convertido = "-" if negativo else ""
+    numero.valor_novo = "-" if negativo else ""
 
-    convertido += converterParteInteira(
+    numero.valor_novo += converterParteInteira(
         parte_inteira,
-        base_atual,
-        base_nova)
+        numero.base_atual,
+        numero.base_nova)
 
     if parte_fracionaria:
-        convertido += f".{converterParteFracionaria(parte_fracionaria, base_atual, base_nova)}"
-
-    return convertido
+        numero.valor_novo += f".{converterParteFracionaria(
+            parte_fracionaria,
+            numero.base_atual,
+            numero.base_nova)}"

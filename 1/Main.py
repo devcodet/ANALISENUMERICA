@@ -10,14 +10,11 @@ def main():
         numero = lerInput()
 
         # PROCESSAMENTO - CONVERSÃO
-        numero.valor_novo = converter(
-            numero.valor_atual,
-            numero.base_atual,
-            numero.base_nova)
+        converter(numero)
 
         # OUTPUT - MOSTRAR RESULTADO
-        print(f"{numero.valor_atual} NA BASE {numero.base_atual}.")
-        print(f"O número na base {numero.base_nova} é {numero.valor_novo}\n")
+        print(f"ATUAL: {numero.valor_atual} NA BASE {numero.base_atual}")
+        print(f"NOVO: {numero.valor_novo} NA BASE {numero.base_nova}")
 
     except Exception as e:
         print(f"ERRO: {e}")
