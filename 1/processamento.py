@@ -1,6 +1,6 @@
 import decimal
 
-from Globais import VALOR_DECIMAL_PARA_DIGITO, PRECISAO_PARTE_FRACIONARIA, EPS
+from Globais import VALOR_DECIMAL_PARA_DIGITO, DIGITO_PARA_VALOR, PRECISAO_PARTE_FRACIONARIA, EPS
 from Utilitarios import separarNumero
 
 
@@ -41,7 +41,7 @@ def parteInteiraBaseAtualParaDecimal(n: str, k: int) -> str:
 
     index = 0
     for value in n_reversed:
-        convertido += VALOR_DECIMAL_PARA_DIGITO[value] * (k ** index)
+        convertido += DIGITO_PARA_VALOR[value] * (k ** index)
         index += 1
     return str(convertido)
 
@@ -88,7 +88,7 @@ def parteFracionariaParaDecimal(n: str, k: int, precision: int) -> str:
     current_precision = 0
     for i in range(len(n)):
         convertido += decimal.Decimal(
-            VALOR_DECIMAL_PARA_DIGITO[n[i]] * (k ** -(i + 1)))
+            DIGITO_PARA_VALOR[n[i]] * (k ** -(i + 1)))
         current_precision += 1
         if current_precision >= precision:
             break
