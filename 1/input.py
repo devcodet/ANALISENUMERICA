@@ -1,7 +1,9 @@
+import Numero
+
 from Utilitarios import validacaoCaracteres
 
 
-def lerInput() -> tuple[int, str, int]:
+def lerInput() -> Numero:
     """
     Lê a entrada do usuário para a base de origem, o número e a base de destino.
 
@@ -25,7 +27,7 @@ def lerInput() -> tuple[int, str, int]:
 
         if not validacaoCaracteres(numero, base_atual):
             print(
-                "Número incompatível com a base atual. Por favor, insira um número válido.")
+                "Número incompatível com a base atual")
             continue
         break
 
@@ -41,4 +43,4 @@ def lerInput() -> tuple[int, str, int]:
             continue
         break
 
-    return base_atual, numero, base_nova
+    return Numero.Numero(base_atual, numero, base_nova, 0)

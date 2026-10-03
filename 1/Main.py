@@ -1,3 +1,4 @@
+import Numero
 
 from Input import lerInput
 from Processamento import converter
@@ -5,15 +6,18 @@ from Processamento import converter
 
 def main():
     try:
-        # INPUT
-        base_atual, numero, base_nova = lerInput()
+        # INPUT - RECOLHER DADOS
+        numero = lerInput()
 
         # PROCESSAMENTO - CONVERSÃO
-        convertido = converter(numero, base_atual, base_nova)
+        numero.valor_novo = converter(
+            numero.valor_atual,
+            numero.base_atual,
+            numero.base_nova)
 
         # OUTPUT - MOSTRAR RESULTADO
-        print(f"{numero} NA BASE {base_atual}.")
-        print(f"O número na base {base_nova} é {convertido}\n")
+        print(f"{numero.valor_atual} NA BASE {numero.base_atual}.")
+        print(f"O número na base {numero.base_nova} é {numero.valor_novo}\n")
 
     except Exception as e:
         print(f"ERRO: {e}")
