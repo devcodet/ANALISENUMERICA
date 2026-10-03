@@ -96,58 +96,54 @@ def parteFracionariaParaDecimal(n: str, k: int, precision: int) -> str:
     return str(convertido)[2:]
 
 
-def converterParteInteira(numero: str, atual_base: int, nova_base: int) -> str:
+def converterParteInteira(numero: str, base_atual: int, base_nova: int) -> str:
     """
     Permite converter a parte inteira de um número da base atual para a nova base.
 
     Args:
-        numero (str): O número na base atual_base
-        atual_base (int): A base atual
-        nova_base (int): A base nova.
+        numero (str): O número na base base_atual
+        base_atual (int): A base atual
+        base_nova (int): A base nova.
 
     Returns:
         str: A parte inteira do número convertida na nova base.
     """
-    if atual_base != 10:
-        decimal: str = parteInteiraBaseAtualParaDecimal(numero, atual_base)
-    else:
-        decimal: str = numero
-    return parteInteiraDecimalParaNovaBase(decimal, nova_base)
+    decimal: str = parteInteiraBaseAtualParaDecimal(
+        numero, base_atual) if base_atual != 10 else numero
+
+    return parteInteiraDecimalParaNovaBase(decimal, base_nova)
 
 
-def converterParteFracionaria(numero: str, atual_base: int, nova_base: int, precision: int = PRECISAO_PARTE_FRACIONARIA) -> str:
+def converterParteFracionaria(numero: str, base_atual: int, base_nova: int, precision: int = PRECISAO_PARTE_FRACIONARIA) -> str:
     """
     Permite converter a parte fracionária de um número na base atual para a nova base.
 
     Args:
-        numero (str): O número na base atual_base
-        atual_base (int): A base atual
-        nova_base (int): A nova base
+        numero (str): O número na base base_atual
+        base_atual (int): A base atual
+        base_nova (int): A nova base
         precision (int, optional): A precisão com a qual se pretende obter o resultado. É PRECISION das Constants.py por defeito.
 
     Returns:
-        str: A parte fracionária do número convertida na nova_base.
+        str: A parte fracionária do número convertida na base_nova.
     """
-    if atual_base != 10:
-        parte_fracionaria = parteFracionariaParaDecimal(
-            numero, atual_base, precision)
-    else:
-        parte_fracionaria = numero
+    parte_fracionaria = parteFracionariaParaDecimal(
+        numero, base_atual, precision) if base_atual != 10 else numero
 
-    return parteFracionariaParaNovaBase(parte_fracionaria, nova_base, precision)
+    return parteFracionariaParaNovaBase(parte_fracionaria, base_nova, precision)
 
 
-def converter(numero: str, atual_base: int, nova_base: int) -> str:
+def converter(numero: str, base_atual: int, base_nova: int) -> str:
     """
     Permite converter um número na base atual para uma nova base.
 
     Args:
-        numero (str): O número na atual_base.
-        atual_base (int): A base atual.
-        nova_base (int): A nova bae.
+        numero (str): O número na base_atual.
+        base_atual (int): A base atual.
+        base_nova (int): A nova bae.
 
     Returns:
-        str: O número convertido na nova_base.
+        str: O número convertido na base_nova.
     """
     negativo, parte_inteira, parte_fracionaria = separarNumero(numero)
 
@@ -155,10 +151,10 @@ def converter(numero: str, atual_base: int, nova_base: int) -> str:
 
     convertido += converterParteInteira(
         parte_inteira,
-        atual_base,
-        nova_base)
+        base_atual,
+        base_nova)
 
     if parte_fracionaria:
-        convertido += f".{converterParteFracionaria(parte_fracionaria, atual_base, nova_base)}"
+        convertido += f".{converterParteFracionaria(parte_fracionaria, base_atual, base_nova)}"
 
     return convertido
