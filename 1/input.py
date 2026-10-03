@@ -12,32 +12,32 @@ def lerInput() -> tuple[int, str, int]:
 
     while True:
         try:
-            base_atual = int(input("Insira a base atual (2 a 62): "))
+            base_atual = int(input("BASE ATUAL (2 a 62): "))
         except ValueError:
-            print("Base inválida. Por favor, insira um número inteiro entre 2 e 62.")
+            print("Base inválida. Insira um número inteiro entre 2 e 62.")
             continue
 
         if base_atual < 2 or base_atual > 62:
-            print("Base inválida. Por favor, insira um número inteiro entre 2 e 62.")
+            print("Base inválida. Insira um número inteiro entre 2 e 62.")
             continue
 
-        numero = input("Insira o número a ser convertido: ")
+        numero = input("NUMERO: ")
 
         if not validacaoCaracteres(numero, base_atual):
             print(
-                "Número imcompatível com a base atual. Por favor, insira um número válido.")
+                "Número incompatível com a base atual. Por favor, insira um número válido.")
             continue
         break
 
     while True:
         try:
-            base_nova = int(input("Insira a base de destino (2 a 62): "))
+            base_nova = int(input("NOVA BASE (2 a 62): "))
         except ValueError:
-            print("Base inválida. Por favor, insira um número inteiro entre 2 e 62.")
+            print("Base inválida. Insira um número inteiro entre 2 e 62.")
             continue
 
         if base_nova < 2 or base_nova > 62:
-            print("Base inválida. Por favor, insira um número inteiro entre 2 e 62.")
+            print("Base inválida. Insira um número inteiro entre 2 e 62.")
             continue
         break
 

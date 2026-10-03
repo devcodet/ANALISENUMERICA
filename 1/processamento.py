@@ -1,6 +1,6 @@
 import decimal
 
-from Globais import VALOR_DECIMAL_PARA_DIGITO, DIGITO_PARA_VALOR, PRECISAO, EPS
+from Globais import VALOR_DECIMAL_PARA_DIGITO, PRECISAO_PARTE_FRACIONARIA, EPS
 from Utilitarios import separarNumero
 
 
@@ -41,7 +41,7 @@ def parteInteiraBaseAtualParaDecimal(n: str, k: int) -> str:
 
     index = 0
     for value in n_reversed:
-        convertido += DIGITO_PARA_VALOR[value] * (k ** index)
+        convertido += VALOR_DECIMAL_PARA_DIGITO[value] * (k ** index)
         index += 1
     return str(convertido)
 
@@ -65,7 +65,7 @@ def parteFracionariaParaNovaBase(n: str, k: int, precision: int) -> str:
     for _ in range(precision):
         product = fractional_part * k
         digit = int(product)
-        convertido += DIGITO_PARA_VALOR[digit]
+        convertido += VALOR_DECIMAL_PARA_DIGITO[digit]
         fractional_part = product - int(product)
         if fractional_part - EPS <= 0:
             break
@@ -88,7 +88,7 @@ def parteFracionariaParaDecimal(n: str, k: int, precision: int) -> str:
     current_precision = 0
     for i in range(len(n)):
         convertido += decimal.Decimal(
-            DIGITO_PARA_VALOR[n[i]] * (k ** -(i + 1)))
+            VALOR_DECIMAL_PARA_DIGITO[n[i]] * (k ** -(i + 1)))
         current_precision += 1
         if current_precision >= precision:
             break
@@ -115,7 +115,7 @@ def converterParteInteira(numero: str, atual_base: int, nova_base: int) -> str:
     return parteInteiraDecimalParaNovaBase(decimal, nova_base)
 
 
-def converterParteFracionaria(numero: str, atual_base: int, nova_base: int, precision: int = PRECISAO) -> str:
+def converterParteFracionaria(numero: str, atual_base: int, nova_base: int, precision: int = PRECISAO_PARTE_FRACIONARIA) -> str:
     """
     Permite converter a parte fracionária de um número na base atual para a nova base.
 

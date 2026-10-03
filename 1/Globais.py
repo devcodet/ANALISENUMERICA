@@ -1,4 +1,3 @@
-# Dicionários para conversão entre dígitos e valores.
 VALOR_DECIMAL_PARA_DIGITO = {
     0: "0",  1: "1",  2: "2",  3: "3",  4: "4",  5: "5",  6: "6",  7: "7",  8: "8",  9: "9",
     10: "A", 11: "B", 12: "C", 13: "D", 14: "E", 15: "F", 16: "G", 17: "H", 18: "I", 19: "J",
@@ -8,12 +7,6 @@ VALOR_DECIMAL_PARA_DIGITO = {
     50: "o", 51: "p", 52: "q", 53: "r", 54: "s", 55: "t", 56: "u", 57: "v", 58: "w", 59: "x", 60: "y", 61: "z"
 }
 
-# Dicionário inverso para conversão de dígitos para valores.
-DIGITO_PARA_VALOR = {valor: digito for digito,
-                     valor in VALOR_DECIMAL_PARA_DIGITO.items()}
+PRECISAO_PARTE_FRACIONARIA = 8
 
-# Define a precisão para a parte decimal do número convertido.
-PRECISAO = 8
-
-# Pequeno valor para comparação de igualdade de números de ponto flutuante
 EPS = 1e-9
