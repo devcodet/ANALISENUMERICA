@@ -1,17 +1,9 @@
 from Globais import VALOR_DECIMAL_PARA_DIGITO
 
+# VALIDA SE TODOS OS CARATERES SAO VALIDOS NUM CONJUNTO PERMITIDO PARA A BASE ESCOLHIDA
+
 
 def validacaoCaracteres(numero: str, base: int) -> bool:
-    """
-    Valida se todos os caracteres do número estão dentro do conjunto permitido para a base especificada.
-
-    Args:
-        numero (str): O número a ser validado.
-        base (int): A base numérica para validação.
-
-    Returns:
-        bool: True se todos os caracteres forem válidos, False caso contrário.
-    """
     # DEFINE O CONJUNTO DE CARACTERES PERMITIDOS PARA A BASE ESPECIFICADA
     caracteres_validos = set(VALOR_DECIMAL_PARA_DIGITO[i] for i in range(base))
 
@@ -34,17 +26,11 @@ def validacaoCaracteres(numero: str, base: int) -> bool:
             return False
     return True
 
+# SEPARA O NUMERO NUMA PARTE INTEIRA E NUMA PARTE FRACIONARIA
+
 
 def separarNumero(numero: str) -> tuple[bool, str, str]:
-    """
-    Separa o número em parte inteira e parte decimal.
 
-    Args:
-        numero (str): O número a ser separado.
-
-    Returns:
-        tuple: Um tuplo com um booleano que indica se o número é negativo, e contendo a parte inteira e a parte decimal do número.
-    """
     # É UM NUMERO NEGATIVO?
     numero_negativo = numero.startswith("-")
 

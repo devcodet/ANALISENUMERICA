@@ -3,14 +3,8 @@ import Numero
 from Utilitarios import validacaoCaracteres
 
 
+# LEITURA DA BASE ATUAL, NUMERO E BASE NOVA
 def lerInput() -> Numero:
-    """
-    Lê a entrada do usuário para a base atual, o número e a base nova.
-
-    Returns:
-        Numero: Um objeto da classe Numero contendo as informações do número a ser convertido.
-
-    """
     # CICLO DE LEITURA E VALIDAÇÃO DA BASE ATUAL E DO NÚMERO A CONVERTER
     while True:
         try:
