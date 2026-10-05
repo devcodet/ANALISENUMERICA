@@ -1,3 +1,4 @@
+# ESTRUTURA DE DADOS QUE REPRESENTA O NÚMERO A SER PROCESSADO
 class Numero:
     def __init__(self, base_atual, valor_atual, base_nova, valor_novo):
         self.base_atual = base_atual

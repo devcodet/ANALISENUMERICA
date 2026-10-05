@@ -12,11 +12,13 @@ def validacaoCaracteres(numero: str, base: int) -> bool:
     Returns:
         bool: True se todos os caracteres forem válidos, False caso contrário.
     """
+    # DEFINE O CONJUNTO DE CARACTERES PERMITIDOS PARA A BASE ESPECIFICADA
     caracteres_validos = set(VALOR_DECIMAL_PARA_DIGITO[i] for i in range(base))
 
     contador_ponto = 0
     contador_sinal = 0
 
+    # PERCORRE CADA CARACTERE DO NÚMERO, VALIDANDO SINTAXE E PERTENÇA À BASE
     for i, char in enumerate(numero):
         if char == '.':
             contador_ponto += 1

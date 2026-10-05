@@ -7,7 +7,7 @@ VALOR_DECIMAL_PARA_DIGITO = {
     50: "o", 51: "p", 52: "q", 53: "r", 54: "s", 55: "t", 56: "u", 57: "v", 58: "w", 59: "x", 60: "y", 61: "z"
 }
 
-# Dicionário inverso para conversão de dígitos para valores.
+
 DIGITO_PARA_VALOR = {valor: digito for digito,
                      valor in VALOR_DECIMAL_PARA_DIGITO.items()}
 

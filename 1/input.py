@@ -5,13 +5,13 @@ from Utilitarios import validacaoCaracteres
 
 def lerInput() -> Numero:
     """
-    Lê a entrada do usuário para a base de origem, o número e a base de destino.
+    Lê a entrada do usuário para a base atual, o número e a base nova.
 
     Returns:
-        tuple: Uma tupla contendo a base de origem (int), o número (str) e a base de destino (int).
+        Numero: Um objeto da classe Numero contendo as informações do número a ser convertido.
 
     """
-
+    # CICLO DE LEITURA E VALIDAÇÃO DA BASE ATUAL E DO NÚMERO A CONVERTER
     while True:
         try:
             base_atual = int(input("BASE ATUAL (2 a 62): "))
@@ -31,6 +31,7 @@ def lerInput() -> Numero:
             continue
         break
 
+    # CICLO DE LEITURA E VALIDAÇÃO DA NOVA BASE
     while True:
         try:
             base_nova = int(input("NOVA BASE (2 a 62): "))
@@ -43,4 +44,5 @@ def lerInput() -> Numero:
             continue
         break
 
+    # RETORNA UMA NOVA INSTÂNCIA DA CLASSE NUMERO COM OS DADOS VALIDADOS
     return Numero.Numero(base_atual, numero, base_nova, 0)

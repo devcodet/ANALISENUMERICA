@@ -1,7 +1,7 @@
 import Numero
 
-from Input import lerInput
-from Processamento import converter
+from input import lerInput
+from processamento import converter
 
 
 def main():
