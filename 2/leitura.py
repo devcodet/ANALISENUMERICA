@@ -3,6 +3,8 @@ from traducao import traduzir
 
 x = symbols("x")
 
+# Funções de leitura de dados do usuário
+
 def ler_numero(mensagem, positivo=False):
     while True:
         texto = input(mensagem).strip().replace(",", ".")
@@ -43,7 +45,7 @@ def ler_funcao():
 
         try:
             if texto.count("=") == 1:
-                # É uma equação, então converte de esquerda = direita para esquerda - direita = 0
+                # É uma equação. Converte de esquerda = direita para esquerda - direita = 0
                 esquerda, direita = texto.split("=")
                 expressao = sympify(esquerda) - sympify(direita)
             else:

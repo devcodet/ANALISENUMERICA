@@ -1,7 +1,9 @@
-def secante(f, x0, x1, tipo, erro, max_iter):
 
+def secante(f, x0, x1, tipo, erro, max_iter):
+    # Calcula f nos extremos uma só vez (evita repetir cálculos)
     f0, f1 = f(x0), f(x1)
 
+    # Início do método da secante
     for i in range(1, max_iter + 1):
         if f1 - f0 == 0:
             raise ValueError("f(x0) = f(x1): divisão por zero na fórmula da secante.")

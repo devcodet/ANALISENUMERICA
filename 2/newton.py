@@ -1,6 +1,7 @@
 
 def newton(f, df, x0, tipo, erro, max_iter):
 
+    # Início do método de Newton
     for i in range(1, max_iter + 1):
         d = df(x0)
         if d == 0:
