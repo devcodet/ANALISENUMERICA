@@ -1,4 +1,5 @@
-from leitura import ler_funcao, ler_intervalo, ler_metodo, ler_precisao_iteracoes
+from sympy import lambdify, diff
+from leitura import x, ler_funcao, ler_intervalo, ler_metodo, ler_precisao_iteracoes
 from bisseccao import bissecao
 from secante import secante
 from newton import newton
@@ -16,7 +17,8 @@ def main():
         if metodo == "bissecao":
             resultado = bissecao(f, a, b, tipo, erro, max_iter)
         elif metodo == "newton":
-            print("Newton ainda não está implementado.")
+            df = lambdify(x, expressao.diff(x), "math")  # Derivada da função
+            resultado = newton(f, df, (a + b) / 2, tipo, erro, max_iter)
         elif metodo == "secante":
             resultado = secante(f, a, b, tipo, erro, max_iter)
     except (ValueError, ZeroDivisionError, OverflowError) as e:
@@ -30,4 +32,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-    
