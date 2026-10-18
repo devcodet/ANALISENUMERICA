@@ -1,4 +1,5 @@
-from sympy import symbols, lambdify, sympify, diff
+from sympy import symbols, lambdify, sympify
+from traducao import traduzir
 
 x = symbols("x")
 
@@ -34,7 +35,7 @@ def ler_inteiro_positivo(mensagem):
 def ler_funcao():
     while True:
         texto = input("Função/equação (ex.: x^3 - 2*x - 5  ou  cos(x) = x): ")
-        texto = texto.strip().replace("^", "**").replace("==", "=")
+        texto = traduzir(texto.strip()).replace("==", "=")
 
         # Aceita também a notação "f(x) = ...", removendo o prefixo
         if texto.lower().startswith("f(x)"):
