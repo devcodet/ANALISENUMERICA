@@ -29,6 +29,8 @@ def main():
         print(f"Raiz aproximada: {raiz}")
         print(f"f(raiz) = {f(raiz):.3e}")
         print(f"Número de iterações: {iteracoes}")
+        if abs(f(raiz)) > 1e-6:  # Limite ajustável conforme necessário
+            print("Aviso: f(raiz) não é próximo de zero; o valor obtido provavelmente não é uma raiz.")
 
 if __name__ == "__main__":
     main()

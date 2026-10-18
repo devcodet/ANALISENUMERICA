@@ -11,7 +11,9 @@ def bissecao(f, a, b, tipo, erro, max_iter):
 
     if (fa > 0) == (fb > 0):
         print("f(a) e f(b) têm o mesmo sinal: não se garante zero neste intervalo.")
-        return None
+        continuar = input("Pretende continuar? (s/n): ").strip().lower()
+        if continuar != "s":
+            return None
 
     for i in range(1, max_iter + 1):
         c = (a + b) / 2
