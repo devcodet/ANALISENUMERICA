@@ -7,4 +7,4 @@ class Numero:
         self.valor_novo = str(valor_novo)
 
 
-PRECISAO_PARTE_FRACIONARIA = 8
+PRECISAO_PARTE_FRACIONARIA = 1000

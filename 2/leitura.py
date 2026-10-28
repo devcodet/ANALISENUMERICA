@@ -1,5 +1,5 @@
 from sympy import symbols, lambdify, sympify
-from traducao import traduzir
+from utilitarios import traduzir
 
 x = symbols("x")
 
@@ -12,10 +12,10 @@ def ler_numero(mensagem, positivo=False):
         try:
             numero = float(texto)
         except ValueError:
-            print("Isso não é um número. Tente de novo.")
+            print("\nIsso não é um número. Tente de novo.")
             continue
         if positivo and numero <= 0:
-            print("O número tem de ser positivo. Tente de novo.")
+            print("\nO número tem de ser positivo. Tente de novo.")
             continue
         return numero
 
@@ -26,11 +26,11 @@ def ler_inteiro_positivo(mensagem):
         try:
             numero = int(texto)
         except ValueError:
-            print("Digite um número inteiro (ex: 50).")
+            print("\nDigite um número inteiro (ex: 50).")
             continue
 
         if numero <= 0:
-            print("Tem de ser maior que 0.")
+            print("\nTem de ser maior que 0.")
         else:
             return numero
 
@@ -54,14 +54,14 @@ def ler_funcao():
 
             # Só a variável x é permitida
             if expressao.free_symbols - {x}:
-                print("Só pode usar a variável x.")
+                print("\nSó pode usar a variável x.")
                 continue
 
             f = lambdify(x, expressao, "math") # Converte para uma função Python que usa a biblioteca math
             return f, expressao
         except Exception:
             # Texto inválido (parênteses por fechar, nomes desconhecidos, etc.)
-            print("Função inválida. Exemplo: x^3 - 2*x - 5")       
+            print("\nFunção inválida. Exemplo: x^3 - 2*x - 5")       
 
 def ler_intervalo():
     while True:
@@ -70,7 +70,7 @@ def ler_intervalo():
 
         if a < b:
             return a, b
-        print("O início tem de ser menor que o fim.")
+        print("\nO início tem de ser menor que o fim.")
 
 
 def ler_metodo():
@@ -87,14 +87,14 @@ def ler_metodo():
         elif escolha == "3":
             return "secante"
         else:
-            print("Opção inválida. Digite 1, 2 ou 3.")
+            print("\nOpção inválida. Digite 1, 2 ou 3.")
 
 def ler_precisao_iteracoes():
     while True:
         tipo = input("Tipo de erro (a - absoluto, r - relativo): ").strip().lower()
         if tipo in ("a", "r"):
             break
-        print("Digite 'a' ou 'r'.")
+        print("\nDigite 'a' ou 'r'.")
     erro = ler_numero("Erro pretendido (ex.: 1e-6): ", positivo=True)
     max_iter = ler_inteiro_positivo("Número máximo de iterações: ")
     return tipo, erro, max_iter

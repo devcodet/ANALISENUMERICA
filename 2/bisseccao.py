@@ -1,37 +1,37 @@
+from utilitarios import cabecalho_tabela_bisseccao, fim_tabela_bisseccao, linha_tabela_bisseccao, verificar_bolzano, verificar_raiz_extremo, calcular_estimativa
 
 def bissecao(f, a, b, tipo, erro, max_iter):
-    # Calcula f nos extremos uma só vez (evita repetir cálculos)
-    fa, fb = f(a), f(b)
 
-    # Se um extremo já for raiz, não é preciso iterar
-    if fa == 0:
-        return a, 0
-    if fb == 0:
-        return b, 0
+    r = verificar_raiz_extremo(f, a, b) # Verifica se f(a) ou f(b) é zero, o que significa que encontramos uma raiz exata
+    if r is not None:
+        return r
+    if not verificar_bolzano(f, a, b): # Verifica se f(a) e f(b) têm sinais opostos
+        return None                    # Se não tiverem, o método da bissecção não pode ser aplicado
 
-    # Teorema de Bolzano: f(a) e f(b) devem ter sinais opostos para garantir que há uma raiz no intervalo
-    if (fa > 0) == (fb > 0):
-        print("f(a) e f(b) têm o mesmo sinal: não se garante zero neste intervalo.")
-        continuar = input("Pretende continuar? (s/n): ").strip().lower()
-        if continuar != "s":
-            return None
-        
+    # f(a) é usado na decisão de que metade manter, então calculamos uma vez no início
+    fa = f(a)
+
+    cabecalho_tabela_bisseccao()  # Imprime o cabeçalho da tabela de iterações
+
     # Início do método da bissecção
-    for i in range(1, max_iter + 1):
-        c = (a + b) / 2
-        fc = f(c)
+    try:
+        for i in range(1, max_iter + 1):
+            c = (a + b) / 2
+            fc = f(c)
 
-        estimativa = (b - a) / 2
-        if tipo == "r" and c != 0:
-            estimativa = estimativa / abs(c) # Erro relativo: divide por |c|
+            estimativa = calcular_estimativa(tipo, (b - a) / 2, c)  # Calcula a estimativa de erro com base no tipo escolhido
 
-        if fc == 0 or estimativa < erro:
-            return c, i
+            linha_tabela_bisseccao(i, a, b, c, fc, estimativa)  # Imprime linha a linha a tabela de iterações
 
-        if (fa > 0) != (fc > 0):
-            b, fb = c, fc #Atualiza o intervalo para [a, c]
-        else:
-            a, fa = c, fc #Atualiza o intervalo para [c, b]
+            if fc == 0 or estimativa < erro:
+                return c, i  # Convergiu, logo retorna a raiz aproximada e o número de iterações
 
-    print(f"Atingiu o máximo de {max_iter} iterações sem chegar ao erro pedido.")
+            if (fa > 0) != (fc > 0):
+                b = c #Atualiza o intervalo para [a, c]
+            else:
+                a, fa = c, fc #Atualiza o intervalo para [c, b]
+    finally:
+        fim_tabela_bisseccao()  # Imprime a linha final da tabela de iterações - corre sempre: no return, no raise e ao fim do ciclo
+
+    print(f"\nAtingiu o máximo de {max_iter} iterações sem chegar ao erro pedido.")
     return c, max_iter
