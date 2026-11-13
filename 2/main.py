@@ -14,7 +14,7 @@ def main():
 
     resultado = None
 
-    print(f"Método -> {metodo.capitalize()}")
+    print(f"\nMétodo -> {metodo.capitalize()}")
 
     try:
         if metodo == "bissecao":
