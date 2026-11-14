@@ -1,4 +1,5 @@
 from ValidarLeitura import validar_matriz, validar_vetor, validar_tamanho_matriz
+import numpy
 
 
 # Funções de leitura de dados do usuário
@@ -32,35 +33,35 @@ def ler_inteiro_positivo(mensagem) -> int:
         else:
             return numero
 
-def tamanho_matriz() -> int:
+def ler_tamanho_matriz() -> int:
 
     while True:
 
-        n = input("\nInsira o número de equações e incógnitas do sistema(linhas da matriz):").strip()
+        n = input("\nInsira o número de equações e incógnitas do sistema(linhas e colunas da matriz):").strip()
 
         try:
-            n = validar_tamanho_matriz(n)
+            validar_tamanho_matriz(n)
         except ValueError as e:
             print(f"\nFormato inválido: {e}")
             continue
 
         return n
 
-def ler_matriz(linhas: int, colunas: int) -> list[list[float]]:
+def ler_matriz(n: int) -> list[list[float]]:
 
-    matriz: list[list[float]] = [[0.0 for _ in range(colunas)] for _ in range(linhas)]
+    matriz: list[list[float]] = numpy.zeros((n, n)).tolist()
 
-    for i in range(linhas):
+    for i in range(n):
         while True:
-            linha = input(f"\nInsira os {colunas} valores da linha {i + 1} da matriz dos coeficientes A, separados por espaço: ").strip().split()
+            linha = input(f"\nInsira os {n} valores da linha {i + 1} da matriz dos coeficientes A, separados por espaço: ").strip().split()
 
-            if len(linha) != colunas:
-                print(f"\nErro: Insira exatamente {colunas} valores.")
+            if len(linha) != n:
+                print(f"\nErro: Insira exatamente {n} valores.")
                 continue
 
             try:
                 matriz[i] = [float(valor) for valor in linha]
-                validar_matriz(matriz, linhas, colunas)
+                validar_matriz(matriz, n)
                 break
             except ValueError as e:
                 print(f"\nMatriz inválida. {e}. Tente novamente.")  
@@ -98,14 +99,20 @@ def ler_metodo() -> str:
         else:
             print("\nOpção inválida. Digite 1 ou 2.")
 
-def ler_tolerancia_iteracoes() -> tuple[str, float, int]:
+def ler_tolerancia_iteracoes() -> tuple[str, str, float, int]:
     while True:
-        tipo = input("Tipo de erro (a - absoluto, r - relativo): ").strip().lower()
-        if tipo in ("a", "r"):
+        tipo_erro = input("Tipo de erro (a - absoluto, r - relativo): ").strip().lower()
+        if tipo_erro in ("a", "r"):
             break
         print("\nDigite 'a' ou 'r'.")
+
+    while True:
+        tipo_norma = input("Tipo de norma utilizada (s - soma, e - euclidiana, m - do máximo): ").strip().lower()
+        if tipo_norma in ("s", "e", "m"):
+            break
+        print("\nDigite 's', 'e' ou 'm'.")
         
     tolerancia = ler_numero("Tolerância pretendida (ex.: 1e-6): ", positivo=True)
     max_iter = ler_inteiro_positivo("Número máximo de iterações: ")
 
-    return tipo, tolerancia, max_iter
+    return tipo_erro, tipo_norma, tolerancia, max_iter
