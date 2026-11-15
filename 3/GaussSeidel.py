@@ -39,6 +39,4 @@ def gauss_seidel(matrizA: list[list[float]], vetorB: list[float], tipo_erro: str
             convergiu = True
             break
 
-        x_ant = x.copy()
-
     return x.tolist(), convergiu, iteracoes

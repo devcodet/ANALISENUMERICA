@@ -33,7 +33,7 @@ def main():
     n = ler_tamanho_matriz()
     A = ler_matriz(n)
     B = ler_vetor(n)
-    x0 = ler_vetor(n)
+    x0 = ler_vetor(n, "da aproximação inicial X(0)")
     metodo = ler_metodo()
     tipo_erro, tipo_norma, tol, max_iter = ler_tolerancia_iteracoes()
 

@@ -52,10 +52,22 @@ def imprimir_resultado(metodo, convergiu, x, iteracoes, max_iter, tol) -> None:
         print(f"[{metodo}] Número máximo de iterações ({max_iter}) excedido sem convergência (tolerância {tol:g} não atingida).")
         print(f"Última aproximação: {formatar_vetor(x)}")
 
+def largura_vetor(n: int) -> int:
+    # "[" + n componentes de largura 12 separadas por ", " + "]"
+    return 2 + 12 * n + 2 * (n - 1)
+
+def vetor_alinhado(x) -> str:
+    return "[" + ", ".join(f"{v:12.8f}" for v in x) + "]"
+
 def imprimir_cabecalho(metodo, n) -> None:
-    print(f"\n===== Método iterativo de {metodo} =====")
-    print(f"{'k':>4} | {'X(k)':<{max(4, 12 * n)}} | Erro")
+    largura = largura_vetor(n)
+    print(f"\nMétodo iterativo de {metodo} para sistemas de {n} equações lineares:")
+    print()
+    print("=" * (largura + 21))
+    print(f"{'k':>4} | {'X(k)':^{largura}} | {'Erro':^12}")
+    print("-" * (largura + 21))
 
 def imprimir_iteracao(k, x, erro) -> None:
     texto_erro = "-" if erro is None else f"{erro:.6e}"
-    print(f"{k:>4} | {formatar_vetor(x)} | {texto_erro}")
+    print(f"{k:>4} | {vetor_alinhado(x)} | {texto_erro:>12}")
+

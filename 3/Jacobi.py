@@ -17,12 +17,12 @@ def jacobi(matrizA: list[list[float]], vetorB: list[float], tipo_erro: str,
     else:
         x = numpy.array(x0, dtype=float)
 
-    x_novo = numpy.zeros(n)
     convergiu = False
     imprimir_cabecalho("Jacobi", n)
     imprimir_iteracao(0, x, None)
 
     for iteracoes in range(1, max_iter+1):
+        x_novo = numpy.zeros(n) # Vetor novo em cada iteração
         # Calcular a próxima aproximação
         for i in range(n):
             soma = sum(matrizA[i][j] * x[j] for j in range(n) if j != i)
@@ -32,7 +32,7 @@ def jacobi(matrizA: list[list[float]], vetorB: list[float], tipo_erro: str,
         erro = calcular_erro(tipo_erro, norma_vetor(x_novo - x, tipo_norma), norma_vetor(x_novo, tipo_norma))
         imprimir_iteracao(iteracoes, x_novo, erro)
 
-        x = x_novo # Devolve-se a aproximação mais recente 
+        x = x_novo # Devolve a aproximação mais recente 
 
         if not math.isfinite(erro):
                 print("\nO método divergiu (valores infinitos ou indefinidos).")

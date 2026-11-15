@@ -1,6 +1,6 @@
 import math
 
-def validar_numero(valor: str, positivo: bool = False) -> None:
+def validar_numero(valor: str) -> None:
     try:
         valor = float(valor)
     except ValueError:
@@ -29,7 +29,7 @@ def validar_matriz(matriz: list[list[float]], n: int) -> bool:
             validar_numero(str(valor))
     return True
 
-def validar_tamanho_matriz(n: str) -> bool:
+def validar_tamanho_matriz(n: str) -> int:
     n = n.strip()
 
     if not n.isdigit():
