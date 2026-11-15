@@ -40,12 +40,9 @@ def ler_tamanho_matriz() -> int:
         n = input("\nInsira o número de equações e incógnitas do sistema(linhas e colunas da matriz):").strip()
 
         try:
-            validar_tamanho_matriz(n)
+            return validar_tamanho_matriz(n)
         except ValueError as e:
             print(f"\nFormato inválido: {e}")
-            continue
-
-        return n
 
 def ler_matriz(n: int) -> list[list[float]]:
 
@@ -68,10 +65,10 @@ def ler_matriz(n: int) -> list[list[float]]:
 
     return matriz 
 
-def ler_vetor(tamanho: int) -> list[float]:
+def ler_vetor(tamanho: int, descricao: str = "do vetor dos termos independentes B") -> list[float]:
 
     while True:
-        linha = input(f"\nInsira os {tamanho} valores do vetor dos termos independentes B, separados por espaço: ").strip().split()
+        linha = input(f"\nInsira os {tamanho} valores {descricao}, separados por espaço: ").strip().split()
 
         if len(linha) != tamanho:
             print(f"\nErro: Insira exatamente {tamanho} valores.")

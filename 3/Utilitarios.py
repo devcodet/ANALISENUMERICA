@@ -21,18 +21,6 @@ def verificar_determinante_zero(matriz: list[list[float]], n: int) -> tuple[floa
     det = M.det()
     return float(det), det == 0
 
-def norma_da_soma(matriz, n) -> float:
-
-    norma = 0
-    for i in range(0, n):
-        soma = 0
-        for j in range(0, n):
-            soma = soma + abs(matriz[i][j])
-        if (soma > norma):
-            norma = soma
-
-    return norma
-
 def norma_vetor(vetor, tipo_norma) -> float:
 
     if tipo_norma == "s":
@@ -63,3 +51,11 @@ def imprimir_resultado(metodo, convergiu, x, iteracoes, max_iter, tol) -> None:
     else:
         print(f"[{metodo}] Número máximo de iterações ({max_iter}) excedido sem convergência (tolerância {tol:g} não atingida).")
         print(f"Última aproximação: {formatar_vetor(x)}")
+
+def imprimir_cabecalho(metodo, n) -> None:
+    print(f"\n===== Método iterativo de {metodo} =====")
+    print(f"{'k':>4} | {'X(k)':<{max(4, 12 * n)}} | Erro")
+
+def imprimir_iteracao(k, x, erro) -> None:
+    texto_erro = "-" if erro is None else f"{erro:.6e}"
+    print(f"{k:>4} | {formatar_vetor(x)} | {texto_erro}")

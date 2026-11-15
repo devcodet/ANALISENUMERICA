@@ -1,9 +1,12 @@
+import math
 
 def validar_numero(valor: str, positivo: bool = False) -> None:
     try:
         valor = float(valor)
     except ValueError:
         raise ValueError(f"Erro: '{valor}' não é um número válido.")
+    if not math.isfinite(valor):
+        raise ValueError(f"Erro: '{valor}' não é um número finito.")
 
 def validar_vetor(vetor: list[float], tamanho: int) -> bool:
 
@@ -36,3 +39,5 @@ def validar_tamanho_matriz(n: str) -> bool:
 
     if n <= 0:
         raise ValueError("Erro: O número de linhas e colunas deve ser maior que zero.")
+
+    return n

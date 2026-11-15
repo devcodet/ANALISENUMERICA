@@ -11,8 +11,7 @@ def analisar_sistema_de_equacoes_lineares(matriz, n) -> bool:
         print("\nAviso: o determinante de A é nulo (matriz singular): o sistema não tem solução única.")
         return False
     else:
-        print(f"\nDeterminante da matriz A = {det:.6g}: o sistema tem solução única." 
-            "Podemos aplicar os métodos iterativos de Jacobi e Gauss-Seidel, sem garantias de convergência.")
+        print(f"\nDeterminante da matriz A = {det:.6g}: o sistema tem solução única.")
 
     if verificar_diagonalmente_dominante(matriz, n):
         print("\nA matriz A é estritamente diagonalmente dominante: a convergência dos métodos é garantida.")
@@ -31,26 +30,20 @@ def main():
     print("=== Resolução de sistemas de equações lineares (AX = B)"
         " pelo método iterativo de Jacobi e Gauss-Seidel ===")
 
-    while True:
-        n = ler_tamanho_matriz()
-        A = ler_matriz(n)
-        B = ler_vetor(n)
-        x0 = ler_vetor(n)
-        metodo = ler_metodo()
-        tipo_erro, tipo_norma, tol, max_iter = ler_tolerancia_iteracoes()
+    n = ler_tamanho_matriz()
+    A = ler_matriz(n)
+    B = ler_vetor(n)
+    x0 = ler_vetor(n)
+    metodo = ler_metodo()
+    tipo_erro, tipo_norma, tol, max_iter = ler_tolerancia_iteracoes()
 
-        if analisar_sistema_de_equacoes_lineares(A, n):
-            if metodo == "Jacobi":
-                x, convergiu, iteracoes = jacobi(A, B, tipo_erro, tipo_norma, tol, max_iter, x0)
-            else:
-                x, convergiu, iteracoes = gauss_seidel(A, B, tipo_erro, tipo_norma, tol, max_iter, x0)
+    if analisar_sistema_de_equacoes_lineares(A, n):
+        if metodo == "Jacobi":
+            x, convergiu, iteracoes = jacobi(A, B, tipo_erro, tipo_norma, tol, max_iter, x0)
+        else:
+            x, convergiu, iteracoes = gauss_seidel(A, B, tipo_erro, tipo_norma, tol, max_iter, x0)
 
-            if convergiu:
-                print(f"\nO método convergiu em {iteracoes} iterações.")
-            else:
-                print(f"\nO número máximo de iterações: {max_iter}, foi excedido sem convergência.")
-
-            imprimir_resultado(metodo, convergiu, x, iteracoes, max_iter, tol)
+        imprimir_resultado(metodo, convergiu, x, iteracoes, max_iter, tol)
 
 if __name__ == "__main__":
     main()
