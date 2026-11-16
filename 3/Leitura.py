@@ -1,4 +1,4 @@
-from ValidarLeitura import validar_matriz, validar_vetor, validar_tamanho_matriz
+from ValidarLeitura import converter_para_float, validar_matriz, validar_vetor, validar_tamanho_matriz
 import numpy
 
 
@@ -6,10 +6,10 @@ import numpy
 
 def ler_numero(mensagem, positivo=False) -> float:
     while True:
-        texto = input(mensagem).strip().replace(",", ".")
+        texto = input(mensagem).strip()
 
         try:
-            numero = float(texto)
+            numero = converter_para_float(texto)
         except ValueError:
             print("\nIsso não é um número. Tente de novo.")
             continue
@@ -50,14 +50,14 @@ def ler_matriz(n: int) -> list[list[float]]:
 
     for i in range(n):
         while True:
-            linha = input(f"\nInsira os {n} valores da linha {i + 1} da matriz dos coeficientes A, separados por espaço: ").strip().split()
+            linha = input(f"\nInsira os {n} valores da linha {i + 1} da matriz dos coeficientes A, separados por ';': ").strip().split(';')
 
             if len(linha) != n:
                 print(f"\nErro: Insira exatamente {n} valores.")
                 continue
 
             try:
-                matriz[i] = [float(valor) for valor in linha]
+                matriz[i] = [converter_para_float(valor) for valor in linha]
                 validar_matriz(matriz, n)
                 break
             except ValueError as e:
@@ -68,14 +68,14 @@ def ler_matriz(n: int) -> list[list[float]]:
 def ler_vetor(tamanho: int, descricao: str = "do vetor dos termos independentes B") -> list[float]:
 
     while True:
-        linha = input(f"\nInsira os {tamanho} valores {descricao}, separados por espaço: ").strip().split()
+        linha = input(f"\nInsira os {tamanho} valores {descricao}, separados por ';': ").strip().split(';')
 
         if len(linha) != tamanho:
             print(f"\nErro: Insira exatamente {tamanho} valores.")
             continue
 
         try:
-            vetor = [float(valor) for valor in linha]
+            vetor = [converter_para_float(valor) for valor in linha]
             validar_vetor(vetor, tamanho)
             break
         except ValueError as e:

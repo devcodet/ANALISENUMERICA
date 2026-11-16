@@ -1,5 +1,34 @@
 import math
+from sympy import sympify, log, sin, cos, tan, sec, csc, cot, sqrt, exp, E, pi
 
+FUNCOES = {
+    "sin": sin, "sen": sin, "seno": sin, "sine": sin,
+    "cos": cos, "coseno": cos, "cosseno": cos, "cosine": cos,
+    "tan": tan, "tg": tan, "tangente": tan, "tangent": tan,
+    "sec": sec, "secante": sec, "secant": sec,
+    "csc": csc, "cosec": csc, "cossecante": csc, "cosecante": csc, "cosecant": csc,
+    "cot": cot, "ctg": cot, "cotangente": cot, "cotangent": cot,
+    "ln": log, "log": log, "logn": log,
+    "log10": lambda x: log(x, 10), "log2": lambda x: log(x, 2),
+    "raiz": sqrt, "sqrt": sqrt, "exp": exp,
+    "e": E, "pi": pi,
+}
+
+def converter_para_float(texto: str) -> float:
+
+    original_texto = texto
+    texto = texto.strip().lower().replace("π", "pi").replace("^", "**")
+    if "(" not in texto:  # Vírgula decimal (No caso de não haver funções)
+        texto = texto.replace(",", ".")
+    
+    try:
+        numero = float(sympify(texto, locals=FUNCOES).evalf())
+    except Exception:
+        raise ValueError(f"'{original_texto}' não é um número ou expressão válida.")
+    if not math.isfinite(numero):
+        raise ValueError(f"'{original_texto}' não dá um número finito.")
+    return numero
+    
 def validar_numero(valor: str) -> None:
     try:
         valor = float(valor)
